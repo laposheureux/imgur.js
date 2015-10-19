@@ -1,13 +1,26 @@
 import endpoint from '../../endpoint';
 import utils from '../../utils';
-import _ from 'lodash';
 
 const postOptions = {
     path: 'gallery',
     apiUrl: `${utils.API_URL}/${utils.API_VERSION}`
 };
 
-export default endpoint(_.extend({}, postOptions, {
+function extend() {
+  var key, obj, result = {}, i;
+  for (i = 0; i <= arguments.length; i++) {
+    obj = arguments[i];
+    for (key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        result[key] = obj[key];
+      } else {
+      }
+    }
+  }
+  return result;
+}
+
+export default endpoint(extend({}, postOptions, {
     REASON_DOES_NOT_BELONG_ON_IMGUR: 1,
     get(hash) {
         const path = `${this.path}/${hash}`;
@@ -55,7 +68,7 @@ export default endpoint(_.extend({}, postOptions, {
 
         return this.imgurAPICall(options);
     },
-    comments: endpoint(_.extend({}, postOptions, {
+    comments: endpoint(extend({}, postOptions, {
         get(hash, sort='best') {
             const path = `${this.path}/${hash}/comments/${sort}`;
             const options = utils.buildOptions(this.apiUrl, path, 'get');
