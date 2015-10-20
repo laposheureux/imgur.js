@@ -1,5 +1,6 @@
 import imgurAPICall from './imgurAPICall';
 import imageEndpoint from './endpoints/image';
+import albumEndpoint from './endpoints/album';
 import oauth2Endpoint from './endpoints/oauth2';
 import topicsEndpoint from './endpoints/topics';
 import galleryEndpoint from './endpoints/gallery';
@@ -29,6 +30,7 @@ export default function(clientKey, bearerKey) {
         imgurAPICall,
         CLIENT_ID: clientKey,
         image: imageEndpoint,
+        album: albumEndpoint,
         oauth2: oauth2Endpoint,
         topics: topicsEndpoint,
         gallery: galleryEndpoint,

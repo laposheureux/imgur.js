@@ -48,6 +48,16 @@
         }
     });
 
+    var albumEndpoint = endpoint({
+        path: 'album',
+        apiUrl: utils.API_URL + '/' + utils.API_VERSION,
+        get: function get(hash) {
+            var options = utils.buildOptions(this.apiUrl, this.path + '/' + hash, 'get');
+
+            return this.imgurAPICall(options);
+        }
+    });
+
     var oauth2Endpoint = endpoint({
         path: 'oauth2',
         apiUrl: utils.API_URL,
@@ -302,6 +312,7 @@
             imgurAPICall: imgurAPICall,
             CLIENT_ID: clientKey,
             image: imageEndpoint,
+            album: albumEndpoint,
             oauth2: oauth2Endpoint,
             topics: topicsEndpoint,
             gallery: galleryEndpoint,
