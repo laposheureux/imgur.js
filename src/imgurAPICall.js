@@ -15,7 +15,7 @@ export default function(options) {
         authToken = `Bearer ${utils.bearer}`;
     }
 
-    _.extend(headers, additionalHeaders, {'Authorization': authToken});
+    _.extend(headers, utils.additionalHeaders, {'Authorization': authToken});
 
     return request[options.method](`${options.apiUrl}/${options.path}`)
         .send(options.body)
