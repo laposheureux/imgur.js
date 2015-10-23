@@ -8,15 +8,17 @@ export default function(options) {
         }
     });
 
+    let headers = {}
     let authToken = `Client-ID ${utils.CLIENT_ID}`;
 
     if(utils.bearer) {
         authToken = `Bearer ${utils.bearer}`;
     }
 
+    _.extend(headers, additionalHeaders, {'Authorization': authToken});
+
     return request[options.method](`${options.apiUrl}/${options.path}`)
         .send(options.body)
-        .set('Authorization', authToken)
+        .set(headers)
         .promise();
 };
-
