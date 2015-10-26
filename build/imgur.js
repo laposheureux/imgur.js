@@ -23,16 +23,13 @@
             }
         });
 
-        var headers = {};
         var authToken = 'Client-ID ' + utils.CLIENT_ID;
 
         if (utils.bearer) {
             authToken = 'Bearer ' + utils.bearer;
         }
 
-        _.extend(headers, utils.additionalHeaders, { 'Authorization': authToken });
-
-        return request[options.method](options.apiUrl + '/' + options.path).send(options.body).set(headers).promise();
+        return request[options.method](options.apiUrl + '/' + options.path).send(options.body).set('Authorization', authToken).set(utils.additionalHeaders).promise();
     };
 
     var endpoint = function endpoint(options) {
